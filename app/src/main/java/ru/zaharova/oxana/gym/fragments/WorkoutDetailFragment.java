@@ -59,43 +59,6 @@ public class WorkoutDetailFragment extends Fragment {
         return root;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.workout_detail_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_share:
-//                final Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType("text/plain");
-//                String textToSend = getString(R.string.share_hello_record_text) +
-//                        "\n" + getString(R.string.exercise_share_text) + " "+ workout.getTitle() +
-//                        "\n" + getString(R.string.weight_text) + " " + workout.getRecordWeight() +
-//                        "\n" + getString(R.string.reps_count_text) + " " + workout.getRecordRepsCount();
-//                intent.putExtra(Intent.EXTRA_TEXT, textToSend);
-//                try
-//                {
-//                    startActivity(Intent.createChooser(intent, getString(R.string.share_record_text)));
-//                }
-//                catch (android.content.ActivityNotFoundException ex)
-//                {
-//                    Toast.makeText(getApplicationContext(),
-//                            getString(R.string.share_error_text), Toast.LENGTH_SHORT).show();
-//                }
-//                return true;
-//            case R.id.action_settings:
-//                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.action_quit:
-//                Toast.makeText(this, "Quit", Toast.LENGTH_SHORT).show();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     private void addListeners() {
         weightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -207,60 +170,6 @@ public class WorkoutDetailFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-//    @Override
-//    public void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        workout.setRecordRepsCount(savedInstanceState.getInt("repsCount"));
-//        workout.setRecordWeight(savedInstanceState.getInt("weight"));
-//        try {
-//            workout.setRecordDateFromFormattedString(savedInstanceState.getString("date"));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Log.d(TAG, "Вызван onRestoreInstanceState");
-//        setValues();
-//    }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Log.d(TAG, "Вызван onStart()");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Log.d(TAG, "Вызван onResume()");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        Log.d(TAG, "Вызван onPause()");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        Log.d(TAG, "Вызван onStop()");
-//    }
-//
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        Log.d(TAG, "Вызван onRestart()");
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Log.d(TAG, "Вызван onDestroy()");
-//        Log.e(TAG, "Вызван onDestroy()");
-//        Log.v(TAG, "Вызван onDestroy()");
-//        Log.i(TAG, "Вызван onDestroy()");
-//        Log.v(TAG, "Вызван onDestroy()");
-//        Log.wtf(TAG, "Вызван onDestroy()");
-//    }
-//
 
 }

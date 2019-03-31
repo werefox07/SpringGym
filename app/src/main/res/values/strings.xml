@@ -31,4 +31,7 @@
     <string name="title_mock_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, incidunt.</string>
     <string name="description_mock_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae cum earum, itaque laboriosam natus quas quis quod temporibus totam unde. Atque dolor dolorem enim impedit molestias nemo porro rem voluptatum!</string>
     <string name="add_item">Add exercise</string>
+    <string name="menu_add">Add</string>
+    <string name="add_description">Clicked \"Add\"</string>
+    <string name="settings_description">Clicked \"Settings\"</string>
 </resources>
