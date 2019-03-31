@@ -13,4 +13,13 @@
         android:orderInCategory="20"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_search"
+        android:orderInCategory="9"
+        android:title="@string/menu_search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"/>
+
 </menu>
