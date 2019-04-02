@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import ru.zaharova.oxana.gym.Model.Workout;
-import ru.zaharova.oxana.gym.Model.WorkoutList;
+import ru.zaharova.oxana.gym.model.Workout;
+import ru.zaharova.oxana.gym.model.WorkoutList;
 import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
-
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
     private List<Workout> workoutList = WorkoutList.getInstance().getWorkouts();

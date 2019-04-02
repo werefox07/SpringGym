@@ -12,34 +12,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.Objects;
 
-import ru.zaharova.oxana.gym.Model.Workout;
-import ru.zaharova.oxana.gym.Model.WorkoutList;
+import ru.zaharova.oxana.gym.model.Workout;
+import ru.zaharova.oxana.gym.model.WorkoutList;
 import ru.zaharova.oxana.gym.R;
 
 public class WorkoutDetailFragment extends Fragment {
     private static final String WORKOUT_INDEX = "workoutIndex";
-    private TextView title;
-    private TextView description;
     private TextView recordDate;
     private TextView recordRepsCount;
     private TextView recordWeight;
     private TextView weight;
-    private ImageView image;
     private SeekBar weightSeekBar;
     private EditText repsCountEditText;
     private Button saveRecordButton;
     private Workout workout;
     private Button shareButton;
     public static final String TAG = "WorkoutDetailFragment";
-
-    int index = 0;
 
     public static WorkoutDetailFragment initFragment(int workoutIndex) {
         WorkoutDetailFragment fragment = new WorkoutDetailFragment();
@@ -53,49 +48,11 @@ public class WorkoutDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_workout_detail, container, false);
-        workout = WorkoutList.getInstance().getWorkouts().get(getArguments().getInt(WORKOUT_INDEX));
+        workout = WorkoutList.getInstance().getWorkouts().get(Objects.requireNonNull(getArguments()).getInt(WORKOUT_INDEX));
         initGUI(root, workout);
         addListeners();
         return root;
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.workout_detail_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_share:
-//                final Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType("text/plain");
-//                String textToSend = getString(R.string.share_hello_record_text) +
-//                        "\n" + getString(R.string.exercise_share_text) + " "+ workout.getTitle() +
-//                        "\n" + getString(R.string.weight_text) + " " + workout.getRecordWeight() +
-//                        "\n" + getString(R.string.reps_count_text) + " " + workout.getRecordRepsCount();
-//                intent.putExtra(Intent.EXTRA_TEXT, textToSend);
-//                try
-//                {
-//                    startActivity(Intent.createChooser(intent, getString(R.string.share_record_text)));
-//                }
-//                catch (android.content.ActivityNotFoundException ex)
-//                {
-//                    Toast.makeText(getApplicationContext(),
-//                            getString(R.string.share_error_text), Toast.LENGTH_SHORT).show();
-//                }
-//                return true;
-//            case R.id.action_settings:
-//                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-//                return true;
-//            case R.id.action_quit:
-//                Toast.makeText(this, "Quit", Toast.LENGTH_SHORT).show();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     private void addListeners() {
         weightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -106,15 +63,12 @@ public class WorkoutDetailFragment extends Fragment {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
-
 
         saveRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,21 +77,20 @@ public class WorkoutDetailFragment extends Fragment {
                 int respCount;
                 if (!respCountString.equals("")) {
                     respCount = Integer.parseInt(respCountString);
-
                     int newWeight = Integer.parseInt(weight.getText().toString());
                     if (respCount > workout.getRecordRepsCount() || newWeight > workout.getRecordWeight()) {
                         workout.setRecordRepsCount(respCount);
                         workout.setRecordWeight(newWeight);
                         workout.setRecordDate(new Date());
                         setValues();
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                        Toast toast = Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
                                 getResources().getString(R.string.saved_record_message),
                                 Toast.LENGTH_SHORT
                         );
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                        Toast toast = Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
                                 getResources().getString(R.string.not_saved_record_message),
                                 Toast.LENGTH_SHORT
                         );
@@ -145,7 +98,7 @@ public class WorkoutDetailFragment extends Fragment {
                         toast.show();
                     }
                 } else {
-                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                    Toast toast = Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
                             getResources().getString(R.string.number_count_message),
                             Toast.LENGTH_SHORT
                     );
@@ -158,7 +111,6 @@ public class WorkoutDetailFragment extends Fragment {
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 String textToSend = getString(R.string.share_hello_record_text) +
@@ -169,7 +121,7 @@ public class WorkoutDetailFragment extends Fragment {
                 try {
                     startActivity(Intent.createChooser(intent, getString(R.string.share_record_text)));
                 } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(getActivity().getApplicationContext(),
+                    Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
                             getString(R.string.share_error_text), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -183,7 +135,7 @@ public class WorkoutDetailFragment extends Fragment {
     }
 
     private void initGUI(View view, Workout workout) {
-        title = view.findViewById(R.id.workout_detail_title);
+        TextView title = view.findViewById(R.id.workout_detail_title);
         title.setText(workout.getTitle());
         recordDate = view.findViewById(R.id.workout_detail_record_date);
         recordRepsCount = view.findViewById(R.id.workout_detail_record_reps_count);
@@ -195,72 +147,15 @@ public class WorkoutDetailFragment extends Fragment {
         saveRecordButton = view.findViewById(R.id.workout_detail_save_button);
         shareButton = view.findViewById(R.id.share_button);
         setValues();
-
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         savedInstanceState.putInt("repsCount", workout.getRecordRepsCount());
         savedInstanceState.putInt("weight", workout.getRecordWeight());
         savedInstanceState.putString("date", workout.getFormattedRecordDate());
         Log.d(TAG, "Вызван onSaveInstanceState");
         super.onSaveInstanceState(savedInstanceState);
     }
-
-//    @Override
-//    public void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        workout.setRecordRepsCount(savedInstanceState.getInt("repsCount"));
-//        workout.setRecordWeight(savedInstanceState.getInt("weight"));
-//        try {
-//            workout.setRecordDateFromFormattedString(savedInstanceState.getString("date"));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Log.d(TAG, "Вызван onRestoreInstanceState");
-//        setValues();
-//    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Log.d(TAG, "Вызван onStart()");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Log.d(TAG, "Вызван onResume()");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        Log.d(TAG, "Вызван onPause()");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        Log.d(TAG, "Вызван onStop()");
-//    }
-//
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//        Log.d(TAG, "Вызван onRestart()");
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Log.d(TAG, "Вызван onDestroy()");
-//        Log.e(TAG, "Вызван onDestroy()");
-//        Log.v(TAG, "Вызван onDestroy()");
-//        Log.i(TAG, "Вызван onDestroy()");
-//        Log.v(TAG, "Вызван onDestroy()");
-//        Log.wtf(TAG, "Вызван onDestroy()");
-//    }
-//
-
 }
+
