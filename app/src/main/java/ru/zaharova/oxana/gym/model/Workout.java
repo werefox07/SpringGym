@@ -1,4 +1,4 @@
-package ru.zaharova.oxana.gym.Model;
+package ru.zaharova.oxana.gym.model;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,12 +10,9 @@ public class Workout {
 
     private String title;
     private String description;
-    private String imageUrl;
     private int recordRepsCount;
     private Date recordDate;
     private int recordWeight;
-
-
 
     public Workout(String title) {
         this.title = title;

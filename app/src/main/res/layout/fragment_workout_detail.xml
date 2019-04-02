@@ -143,7 +143,6 @@
                 android:id="@+id/workout_detail_save_button"
                 android:layout_gravity="center"
                 android:text="@string/save" />
-
             <Button
                 style="@style/WrapContentHW"
                 android:id="@+id/share_button"
