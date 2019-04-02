@@ -47,5 +47,4 @@
                 android:title="@string/nav_about_the_developer" />
         </menu>
     </item>
-
 </menu>

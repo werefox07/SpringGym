@@ -1,4 +1,4 @@
-package ru.zaharova.oxana.gym.Model;
+package ru.zaharova.oxana.gym.model;
 
 import java.util.ArrayList;
 import java.util.Date;

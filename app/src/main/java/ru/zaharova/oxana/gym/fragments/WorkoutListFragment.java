@@ -16,9 +16,7 @@ import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
 import ru.zaharova.oxana.gym.list.WorkoutAdapter;
 
-
 public class WorkoutListFragment extends Fragment {
-    private RecyclerView recyclerView;
     public static final String TAG = "WorkoutListActivityLog";
     private OnListItemClickListener listener;
 
@@ -32,19 +30,17 @@ public class WorkoutListFragment extends Fragment {
         super.onAttach(context);
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_workout_list, container, false);
-        recyclerView = root.findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new WorkoutAdapter(listener));
-
         return root;
     }
 
@@ -52,6 +48,5 @@ public class WorkoutListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "Вызван onCreate()");
-
     }
 }
