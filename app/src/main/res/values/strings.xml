@@ -46,4 +46,6 @@
     <string name="nav_feedback_form">Feedback form</string>
     <string name="nav_about_the_developer">About the developer</string>
     <string name="nav_sensors">Sensors</string>
+    <string name="sensor_temp_error">No temperature sensor!</string>
+    <string name="sensor_hum_error">No humidity sensor!</string>
 </resources>
