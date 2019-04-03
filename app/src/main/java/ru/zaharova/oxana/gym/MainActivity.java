@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import ru.zaharova.oxana.gym.fragments.CalendarFragment;
 import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutDetailFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutListFragment;
@@ -25,9 +26,10 @@ import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListItemClickListener {
 
-    FragmentManager fragmentManager;
-    WorkoutListFragment workoutListFragment;
-    SensorsViewFragment sensorsViewFragment;
+    private FragmentManager fragmentManager;
+    private WorkoutListFragment workoutListFragment;
+    private SensorsViewFragment sensorsViewFragment;
+    private CalendarFragment calendarViewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         workoutListFragment = new WorkoutListFragment();
         sensorsViewFragment = new SensorsViewFragment(this);
+        calendarViewFragment = new CalendarFragment(this);
         fragmentManager = getSupportFragmentManager();
         setFragment(workoutListFragment);
     }
@@ -107,7 +110,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_calendar) {
+            setFragment(calendarViewFragment);
 
         } else if (id == R.id.nav_manage) {
 

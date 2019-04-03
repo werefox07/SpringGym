@@ -37,7 +37,6 @@
     <string name="menu_search">Search</string>
     <string name="nav_import_camera">Import</string>
     <string name="nav_gallery">Gallery</string>
-    <string name="nav_slideshow">Slideshow</string>
     <string name="nav_tools">Tools</string>
     <string name="nav_group_communicate">Communicate</string>
     <string name="nav_share">Share</string>
@@ -48,4 +47,8 @@
     <string name="nav_sensors">Sensors</string>
     <string name="sensor_temp_error">No temperature sensor!</string>
     <string name="sensor_hum_error">No humidity sensor!</string>
+    <string name="list_item_date">12.12.2012</string>
+    <string name="list_item_time">25 times</string>
+    <string name="list_item_weight">30kg</string>
+    <string name="nav_calendar">Calendar</string>
 </resources>
