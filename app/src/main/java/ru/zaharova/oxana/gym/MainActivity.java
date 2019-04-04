@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import ru.zaharova.oxana.gym.fragments.CalendarFragment;
+import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutDetailFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutListFragment;
 import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
@@ -24,7 +26,10 @@ import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnListItemClickListener {
 
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
+    private WorkoutListFragment workoutListFragment;
+    private SensorsViewFragment sensorsViewFragment;
+    private CalendarFragment calendarViewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +56,18 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        WorkoutListFragment listFragment = new WorkoutListFragment();
+        workoutListFragment = new WorkoutListFragment();
+        sensorsViewFragment = new SensorsViewFragment(this);
+        calendarViewFragment = new CalendarFragment(this);
         fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.container, listFragment);
-        transaction.commit();
+        setFragment(workoutListFragment);
+    }
+
+    private void setFragment(Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack("")
+                .commit();
     }
 
     @Override
@@ -98,7 +110,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_calendar) {
+            setFragment(calendarViewFragment);
 
         } else if (id == R.id.nav_manage) {
 
@@ -106,6 +119,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_sensors) {
+            setFragment(sensorsViewFragment);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -116,10 +131,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListItemClickListener(int index) {
         WorkoutDetailFragment detailFragment = WorkoutDetailFragment.initFragment(index);
-        fragmentManager
-                .beginTransaction()
-                .add(R.id.container, detailFragment)
-                .addToBackStack("")
-                .commit();
+        setFragment(detailFragment);
     }
 }
