@@ -1,5 +1,6 @@
 package ru.zaharova.oxana.gym;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     private WorkoutListFragment workoutListFragment;
     private SensorsViewFragment sensorsViewFragment;
     private CalendarFragment calendarViewFragment;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity
         calendarViewFragment = new CalendarFragment(this);
         fragmentManager = getSupportFragmentManager();
         setFragment(workoutListFragment);
+
+        intent = new Intent(MainActivity.this, BackgroundService.class);
+        startService(intent);
     }
 
     private void setFragment(Fragment fragment) {
@@ -132,5 +137,11 @@ public class MainActivity extends AppCompatActivity
     public void onListItemClickListener(int index) {
         WorkoutDetailFragment detailFragment = WorkoutDetailFragment.initFragment(index);
         setFragment(detailFragment);
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(intent);
+        super.onDestroy();
     }
 }
