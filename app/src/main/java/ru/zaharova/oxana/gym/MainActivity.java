@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import ru.zaharova.oxana.gym.fragments.AsyncTaskFragment;
 import ru.zaharova.oxana.gym.fragments.CalendarFragment;
 import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutDetailFragment;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private WorkoutListFragment workoutListFragment;
     private SensorsViewFragment sensorsViewFragment;
     private CalendarFragment calendarViewFragment;
+    private AsyncTaskFragment asyncTaskFragment;
     private Intent intent;
 
     @Override
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         workoutListFragment = new WorkoutListFragment();
         sensorsViewFragment = new SensorsViewFragment(this);
         calendarViewFragment = new CalendarFragment(this);
+        asyncTaskFragment = new AsyncTaskFragment();
         fragmentManager = getSupportFragmentManager();
         setFragment(workoutListFragment);
 
@@ -118,7 +121,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_calendar) {
             setFragment(calendarViewFragment);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_calculate) {
+            setFragment(asyncTaskFragment);
 
         } else if (id == R.id.nav_share) {
 
