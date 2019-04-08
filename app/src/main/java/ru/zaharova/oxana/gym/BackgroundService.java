@@ -14,10 +14,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 public class BackgroundService extends IntentService {
-    int messageId = 0;
-    float prevValueTemp = 0;
-    float prevValueHum = 0;
-    float e = 1;
+    private int messageId = 0;
+    private float prevValueTemp = 0;
+    private float prevValueHum = 0;
+    private float e = 1;
 
 
     public BackgroundService() {
