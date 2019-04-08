@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_calendar"
             android:title="@string/nav_calendar" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/nav_tools" />
+            android:id="@+id/nav_calculate"
+            android:icon="@drawable/ic_async_task"
+            android:title="@string/calculate_task" />
         <item
             android:id="@+id/nav_sensors"
             android:icon="@drawable/ic_sensors"
