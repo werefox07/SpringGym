@@ -36,7 +36,6 @@
     <string name="settings_description">Clicked \"Settings\"</string>
     <string name="menu_search">Search</string>
     <string name="nav_import_camera">Import</string>
-    <string name="nav_gallery">Gallery</string>
     <string name="nav_group_communicate">Communicate</string>
     <string name="nav_share">Share</string>
     <string name="nav_send">Send</string>
@@ -54,4 +53,13 @@
     <string name="calculate_btn">Calculate</string>
     <string name="res_text_view">0</string>
     <string name="calculate_task">Calculate task</string>
+    <string name="nav_weather">Weather</string>
+    <string name="item_change_city">Change city</string>
+    <string name="place_not_found">Place not found</string>
+    <string name="weather_clear_night">&#xf02e;</string>
+    <string name="weather_thunder">&#xf01e;</string>
+    <string name="weather_drizzle">&#xf01c;</string>
+    <string name="weather_rainy">&#xf019;</string>
+    <string name="weather_snowy">&#xf01b;</string>
+    <string name="weather_foggy">&#xf014;</string>
 </resources>
