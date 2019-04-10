@@ -55,7 +55,7 @@
     <string name="calculate_task">Calculate task</string>
     <string name="nav_weather">Weather</string>
     <string name="item_change_city">Change city</string>
-    <string name="place_not_found">Place not found</string>
+    <string name="place_not_found">Place not found. Check internet connection.</string>
     <string name="weather_clear_night">&#xf02e;</string>
     <string name="weather_thunder">&#xf01e;</string>
     <string name="weather_drizzle">&#xf01c;</string>

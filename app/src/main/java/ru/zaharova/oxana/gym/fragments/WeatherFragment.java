@@ -1,8 +1,10 @@
 package ru.zaharova.oxana.gym.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -26,7 +28,6 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.WeatherDataLoader;
@@ -42,6 +43,11 @@ public class WeatherFragment extends Fragment {
     private TextView updatedTextView;
     private TextView weatherIconTextView;
     private Context context;
+    private EditText inputCity;
+
+    private SharedPreferences fragmentPrefs;
+    private final String TEXT_KEY_CITY = "text_key";
+    private final String DEFAULT_CITY = "Moscow";
 
     @SuppressLint("ValidFragment")
     public WeatherFragment(Context context) {
@@ -55,8 +61,14 @@ public class WeatherFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_weather, container, false);
         setHasOptionsMenu(true);
 
+        fragmentPrefs = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
+        String text = fragmentPrefs.getString(TEXT_KEY_CITY, "");
+        if (text != null && !text.equals("")) {
+            updateWeatherData(text);
+        } else {
+            updateWeatherData(DEFAULT_CITY);
+        }
         initViews(root);
-
         return root;
     }
 
@@ -88,13 +100,13 @@ public class WeatherFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.item_change_city);
 
-        final EditText input = new EditText(context);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
+        inputCity = new EditText(context);
+        inputCity.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(inputCity);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                updateWeatherData(input.getText().toString());
+                updateWeatherData(inputCity.getText().toString());
             }
         });
         builder.show();
@@ -117,6 +129,7 @@ public class WeatherFragment extends Fragment {
                         @Override
                         public void run() {
                             renderWeather(jsonObject);
+                            saveToPreference(fragmentPrefs, city);
                         }
                     });
                 }
@@ -208,5 +221,11 @@ public class WeatherFragment extends Fragment {
             }
         }
         weatherIconTextView.setText(icon);
+    }
+
+    private void saveToPreference(SharedPreferences preferences, String text) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(TEXT_KEY_CITY, text);
+        editor.apply();
     }
 }
