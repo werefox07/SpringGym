@@ -1,6 +1,5 @@
 package ru.zaharova.oxana.gym.fragments;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

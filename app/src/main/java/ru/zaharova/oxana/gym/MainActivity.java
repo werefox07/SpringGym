@@ -21,6 +21,7 @@ import android.widget.Toast;
 import ru.zaharova.oxana.gym.fragments.AsyncTaskFragment;
 import ru.zaharova.oxana.gym.fragments.CalendarFragment;
 import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
+import ru.zaharova.oxana.gym.fragments.WeatherFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutDetailFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutListFragment;
 import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     private SensorsViewFragment sensorsViewFragment;
     private CalendarFragment calendarViewFragment;
     private AsyncTaskFragment asyncTaskFragment;
+    private WeatherFragment weatherFragment;
     private Intent intent;
 
     @Override
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         sensorsViewFragment = new SensorsViewFragment(this);
         calendarViewFragment = new CalendarFragment(this);
         asyncTaskFragment = new AsyncTaskFragment();
+        weatherFragment = new WeatherFragment(this);
         fragmentManager = getSupportFragmentManager();
         setFragment(workoutListFragment);
 
@@ -116,8 +119,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
 
-        } else if (id == R.id.nav_gallery) {
-
+        } else if (id == R.id.nav_weather) {
+            setFragment(weatherFragment);
         } else if (id == R.id.nav_calendar) {
             setFragment(calendarViewFragment);
 
