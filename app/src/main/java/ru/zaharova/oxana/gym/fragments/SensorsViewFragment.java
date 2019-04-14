@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import ru.zaharova.oxana.gym.R;
 
-@SuppressLint("ValidFragment")
 public class SensorsViewFragment extends Fragment {
     private TextView textHum;
     private TextView textTemp;
@@ -26,8 +25,9 @@ public class SensorsViewFragment extends Fragment {
     private Sensor sensorTemp;
     private Sensor sensorHum;
 
-    public SensorsViewFragment(Context context) {
-        super();
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         this.context = context;
     }
 

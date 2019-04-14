@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         workoutListFragment = new WorkoutListFragment();
-        sensorsViewFragment = new SensorsViewFragment(this);
-        calendarViewFragment = new CalendarFragment(this);
+        sensorsViewFragment = new SensorsViewFragment();
+        calendarViewFragment = new CalendarFragment();
         asyncTaskFragment = new AsyncTaskFragment();
-        weatherFragment = new WeatherFragment(this);
+        weatherFragment = new WeatherFragment();
         fragmentManager = getSupportFragmentManager();
         setFragment(workoutListFragment);
 

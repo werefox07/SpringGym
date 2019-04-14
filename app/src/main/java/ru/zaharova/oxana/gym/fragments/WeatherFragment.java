@@ -1,6 +1,5 @@
 package ru.zaharova.oxana.gym.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,7 +31,6 @@ import java.util.Date;
 import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.WeatherDataLoader;
 
-@SuppressLint("ValidFragment")
 public class    WeatherFragment extends Fragment {
     private final Handler handler = new Handler();
     private final static String LOG_TAG = WeatherFragment.class.getSimpleName();
@@ -49,9 +47,9 @@ public class    WeatherFragment extends Fragment {
     private final String TEXT_KEY_CITY = "text_key";
     private final String DEFAULT_CITY = "Moscow";
 
-    @SuppressLint("ValidFragment")
-    public WeatherFragment(Context context) {
-        super();
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         this.context = context;
     }
 
@@ -60,7 +58,6 @@ public class    WeatherFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_weather, container, false);
         setHasOptionsMenu(true);
-
         fragmentPrefs = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
         String text = fragmentPrefs.getString(TEXT_KEY_CITY, "");
         if (!text.equals("")) {
