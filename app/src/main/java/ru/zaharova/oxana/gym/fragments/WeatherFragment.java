@@ -33,7 +33,7 @@ import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.WeatherDataLoader;
 
 @SuppressLint("ValidFragment")
-public class WeatherFragment extends Fragment {
+public class    WeatherFragment extends Fragment {
     private final Handler handler = new Handler();
     private final static String LOG_TAG = WeatherFragment.class.getSimpleName();
 
@@ -63,7 +63,7 @@ public class WeatherFragment extends Fragment {
 
         fragmentPrefs = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
         String text = fragmentPrefs.getString(TEXT_KEY_CITY, "");
-        if (text != null && !text.equals("")) {
+        if (!text.equals("")) {
             updateWeatherData(text);
         } else {
             updateWeatherData(DEFAULT_CITY);
