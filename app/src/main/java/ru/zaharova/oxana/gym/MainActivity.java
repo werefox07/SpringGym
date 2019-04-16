@@ -22,6 +22,7 @@ import ru.zaharova.oxana.gym.fragments.AsyncTaskFragment;
 import ru.zaharova.oxana.gym.fragments.CalendarFragment;
 import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
 import ru.zaharova.oxana.gym.fragments.WeatherFragment;
+import ru.zaharova.oxana.gym.fragments.WeatherRetrofitFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutDetailFragment;
 import ru.zaharova.oxana.gym.fragments.WorkoutListFragment;
 import ru.zaharova.oxana.gym.interfaces.OnListItemClickListener;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private CalendarFragment calendarViewFragment;
     private AsyncTaskFragment asyncTaskFragment;
     private WeatherFragment weatherFragment;
+    private WeatherRetrofitFragment weatherRetrofitFragment;
     private Intent intent;
 
     @Override
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         calendarViewFragment = new CalendarFragment();
         asyncTaskFragment = new AsyncTaskFragment();
         weatherFragment = new WeatherFragment();
+        weatherRetrofitFragment = new WeatherRetrofitFragment();
         fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
@@ -123,6 +126,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_weather) {
             setFragment(weatherFragment);
+        } else if (id == R.id.nav_weather_retrofit) {
+            setFragment(weatherRetrofitFragment);
         } else if (id == R.id.nav_calendar) {
             setFragment(calendarViewFragment);
 
