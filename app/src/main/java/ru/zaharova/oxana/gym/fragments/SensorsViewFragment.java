@@ -1,6 +1,5 @@
 package ru.zaharova.oxana.gym.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -70,7 +69,7 @@ public class SensorsViewFragment extends Fragment {
         sensorManager.registerListener(listenerHum, sensorHum, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    private void showSensorValue(SensorEvent event, String title, TextView textView){
+    void showSensorValue(SensorEvent event, String title, TextView textView){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(title).append(event.values[0])
                 .append("\n").append("=======================================").append("\n");

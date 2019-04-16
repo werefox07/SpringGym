@@ -17,7 +17,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
     private List<Workout> workoutList = WorkoutList.getInstance().getWorkouts();
     private OnListItemClickListener itemClickListener;
 
-    public WorkoutAdapter(OnListItemClickListener itemClickListener) {
+    public WorkoutAdapter(@NonNull OnListItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
@@ -40,9 +40,5 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutViewHolder> {
     @Override
     public int getItemCount() {
         return workoutList != null ? workoutList.size() : 0;
-    }
-
-    public void addWorkout(Workout workout) {
-        this.workoutList.add(workout);
     }
 }
