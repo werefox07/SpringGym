@@ -1,6 +1,8 @@
 package ru.zaharova.oxana.gym.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,6 +30,9 @@ public class WeatherRetrofitFragment extends Fragment {
     private ImageView imageView;
     private Button button;
 
+    private SharedPreferences sharedPref;
+    private String TEXT_KEY_CITY_RETROFIT = "cityName";
+
     private Context context;
 
     WeatherRequestRestModel model = new WeatherRequestRestModel();
@@ -44,8 +49,13 @@ public class WeatherRetrofitFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_weather_retrofit, container, false);
+        sharedPref = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
+
         initGui(root);
         initEvents();
+        String city = loadCityName();
+        requestRetrofit(city);
+        editCity.setText(city);
         return root;
     }
 
@@ -60,10 +70,15 @@ public class WeatherRetrofitFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                savePreferences();
                 String text = Objects.requireNonNull(editCity.getText()).toString();
                 requestRetrofit(text);
             }
         });
+    }
+
+    private String loadCityName() {
+        return sharedPref.getString(TEXT_KEY_CITY_RETROFIT, "Moscow");
     }
 
     private void requestRetrofit(String city) {
@@ -89,5 +104,11 @@ public class WeatherRetrofitFragment extends Fragment {
     private void setTemperature() {
         String text = getString(R.string.temperature) + ": " + String.valueOf(model.main.temp);
         textTemp.setText(text);
+    }
+
+    private void savePreferences() {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(TEXT_KEY_CITY_RETROFIT, Objects.requireNonNull(editCity.getText()).toString());
+        editor.apply();
     }
 }
