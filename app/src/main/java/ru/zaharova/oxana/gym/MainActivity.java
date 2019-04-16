@@ -4,11 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import ru.zaharova.oxana.gym.fragments.AsyncTaskFragment;
@@ -61,14 +61,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         workoutListFragment = new WorkoutListFragment();
-        sensorsViewFragment = new SensorsViewFragment(this);
-        calendarViewFragment = new CalendarFragment(this);
+        sensorsViewFragment = new SensorsViewFragment();
+        calendarViewFragment = new CalendarFragment();
         asyncTaskFragment = new AsyncTaskFragment();
-        weatherFragment = new WeatherFragment(this);
+        weatherFragment = new WeatherFragment();
         fragmentManager = getSupportFragmentManager();
-        setFragment(workoutListFragment);
+
+        if (savedInstanceState == null) {
+            setFragment(workoutListFragment);
+        }
 
         intent = new Intent(MainActivity.this, BackgroundService.class);
         startService(intent);
@@ -151,4 +153,5 @@ public class MainActivity extends AppCompatActivity
         stopService(intent);
         super.onDestroy();
     }
+
 }

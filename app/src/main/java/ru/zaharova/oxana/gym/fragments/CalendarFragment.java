@@ -1,6 +1,5 @@
 package ru.zaharova.oxana.gym.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,18 +11,20 @@ import android.view.ViewGroup;
 
 import ru.zaharova.oxana.gym.CompoundView;
 
-@SuppressLint("ValidFragment")
 public class CalendarFragment extends Fragment {
-    private final Context context;
+    private Context context;
 
-    public CalendarFragment(Context context) {
-        super();
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         this.context = context;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return new CompoundView(context);
+        CompoundView compoundView = new CompoundView(context);
+        return compoundView;
     }
 }
