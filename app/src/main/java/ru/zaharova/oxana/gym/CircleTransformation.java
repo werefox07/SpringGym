@@ -14,7 +14,12 @@ public class CircleTransformation implements Transformation {
     @Override
     public Bitmap transform(final @NonNull Bitmap source) {
         Path path = new Path();
-        path.addCircle(source.getWidth() / 2, source.getHeight() / 2, source.getWidth() / 2, Path.Direction.CCW);
+        path.addCircle(
+                source.getWidth() / 2,
+                source.getHeight() / 2,
+                source.getWidth() / 2,
+                Path.Direction.CCW
+        );
         Bitmap answerBitMap = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(answerBitMap);
         canvas.clipPath(path);

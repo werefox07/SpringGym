@@ -43,7 +43,7 @@ public class WeatherRetrofitFragment extends Fragment {
     WeatherRequestRestModel model = new WeatherRequestRestModel();
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
     }
@@ -113,7 +113,7 @@ public class WeatherRetrofitFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<WeatherRequestRestModel> call, Throwable t) {
+                    public void onFailure(@NonNull Call<WeatherRequestRestModel> call, @NonNull Throwable t) {
                         textTemp.setText(R.string.error_text);
                     }
                 });
