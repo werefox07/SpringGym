@@ -15,17 +15,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.zaharova.oxana.gym.CircleTransformation;
 import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.rest.OpenWeatherRepo;
 import ru.zaharova.oxana.gym.rest.entites.WeatherRequestRestModel;
 
 public class WeatherRetrofitFragment extends Fragment {
     private TextView textTemp;
+    private TextView textHum;
+    private TextView textPress;
     private TextInputEditText editCity;
     private ImageView imageView;
     private Button button;
@@ -56,11 +61,22 @@ public class WeatherRetrofitFragment extends Fragment {
         String city = loadCityName();
         requestRetrofit(city);
         editCity.setText(city);
+        loadImage();
         return root;
+    }
+
+    private void loadImage() {
+        Picasso.get()
+                .load("https://www.stihi.ru/pics/2017/12/28/6746.jpg")
+                .resize(400, 400)
+                .transform(new CircleTransformation())
+                .into(imageView);
     }
 
     private void initGui(View root) {
         textTemp = root.findViewById(R.id.temp_text_view_retrofit);
+        textHum = root.findViewById(R.id.hum_text_view_retrofit);
+        textPress = root.findViewById(R.id.press_text_view_retrofit);
         editCity = root.findViewById(R.id.edit_city_retrofit);
         imageView = root.findViewById(R.id.image_view_retrofit);
         button = root.findViewById(R.id.button_get_city_retrofit);
@@ -91,6 +107,8 @@ public class WeatherRetrofitFragment extends Fragment {
                         if (response.body() != null && response.isSuccessful()) {
                             model = response.body();
                             setTemperature();
+                            setHumidity();
+                            setPressure();
                         }
                     }
 
@@ -102,8 +120,18 @@ public class WeatherRetrofitFragment extends Fragment {
     }
 
     private void setTemperature() {
-        String text = getString(R.string.temperature) + ": " + String.valueOf(model.main.temp);
+        String text = getString(R.string.temperature) + ": " + String.valueOf(model.main.temp) + "\u2103";
         textTemp.setText(text);
+    }
+
+    private void setHumidity() {
+        String text = getString(R.string.humidity) + ": " + String.valueOf(model.main.humidity) + " %";
+        textHum.setText(text);
+    }
+
+    private void setPressure() {
+        String text = getString(R.string.pressure) + ": " + String.valueOf(model.main.pressure) + " hPa";
+        textPress.setText(text);
     }
 
     private void savePreferences() {

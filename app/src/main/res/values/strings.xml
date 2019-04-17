@@ -61,8 +61,10 @@
     <string name="weather_rainy">&#xf019;</string>
     <string name="weather_snowy">&#xf01b;</string>
     <string name="weather_foggy">&#xf014;</string>
-    <string name="city_input_hint">Введите город</string>
-    <string name="get">Получить</string>
-    <string name="temperature">Температура</string>
+    <string name="city_input_hint">Enter city</string>
+    <string name="get">GET</string>
+    <string name="temperature">Temperature</string>
     <string name="nav_weather_retrofit">Weather (Retrofit)</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
 </resources>

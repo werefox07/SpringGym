@@ -161,8 +161,8 @@ public class    WeatherFragment extends Fragment {
 
     private void setDetails(JSONObject details, JSONObject main) throws JSONException {
         String detailsText = details.getString("description").toUpperCase() + "\n"
-                + "Humidity: " + main.getString("humidity") + "%" + "\n"
-                + "Pressure: " + main.getString("pressure") + "hPa";
+                + "Humidity: " + main.getString("humidity") + " %" + "\n"
+                + "Pressure: " + main.getString("pressure") + " hPa";
         detailsTextView.setText(detailsText);
     }
 
