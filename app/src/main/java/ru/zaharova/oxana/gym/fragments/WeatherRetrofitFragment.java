@@ -120,17 +120,17 @@ public class WeatherRetrofitFragment extends Fragment {
     }
 
     private void setTemperature() {
-        String text = getString(R.string.temperature) + ": " + String.valueOf(model.main.temp) + "\u2103";
+        String text = getString(R.string.temperature) + ": " + model.main.temp + "\u2103";
         textTemp.setText(text);
     }
 
     private void setHumidity() {
-        String text = getString(R.string.humidity) + ": " + String.valueOf(model.main.humidity) + " %";
+        String text = getString(R.string.humidity) + ": " + model.main.humidity + " %";
         textHum.setText(text);
     }
 
     private void setPressure() {
-        String text = getString(R.string.pressure) + ": " + String.valueOf(model.main.pressure) + " hPa";
+        String text = getString(R.string.pressure) + ": " + model.main.pressure + " hPa";
         textPress.setText(text);
     }
 
