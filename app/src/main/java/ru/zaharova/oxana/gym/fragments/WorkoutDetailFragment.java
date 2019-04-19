@@ -122,7 +122,7 @@ public class WorkoutDetailFragment extends Fragment {
                     startActivity(Intent.createChooser(intent, getString(R.string.share_record_text)));
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(),
-                            getString(R.string.share_error_text), Toast.LENGTH_SHORT).show();
+                            getString(R.string.error_text), Toast.LENGTH_SHORT).show();
                 }
             }
         });

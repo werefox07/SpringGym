@@ -21,7 +21,7 @@
     <string name="share_hello_record_text">See my new record!!!</string>
     <string name="exercise_share_text">Exercise:</string>
     <string name="share_record_text">Share record</string>
-    <string name="share_error_text">Error</string>
+    <string name="error_text">Error</string>
     <string name="pull_ups_text">Pull ups</string>
     <string name="pull_ups_description">Pull on the crossbar</string>
     <string name="recods_text">My records</string>
@@ -49,7 +49,6 @@
     <string name="list_item_time">25 times</string>
     <string name="list_item_weight">30kg</string>
     <string name="nav_calendar">Calendar</string>
-    <string name="calculate_button">Calculate</string>
     <string name="calculate_btn">Calculate</string>
     <string name="res_text_view">0</string>
     <string name="calculate_task">Calculate task</string>
@@ -62,4 +61,10 @@
     <string name="weather_rainy">&#xf019;</string>
     <string name="weather_snowy">&#xf01b;</string>
     <string name="weather_foggy">&#xf014;</string>
+    <string name="city_input_hint">Enter city</string>
+    <string name="get">GET</string>
+    <string name="temperature">Temperature</string>
+    <string name="nav_weather_retrofit">Weather (Retrofit)</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
 </resources>
