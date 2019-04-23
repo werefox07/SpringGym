@@ -28,6 +28,10 @@
             android:id="@+id/nav_sensors"
             android:icon="@drawable/ic_sensors"
             android:title="@string/nav_sensors" />
+        <item
+            android:id="@+id/nav_real_time"
+            android:icon="@drawable/ic_time"
+            android:title="@string/nav_time" />
     </group>
 
     <item android:title="@string/nav_group_communicate">

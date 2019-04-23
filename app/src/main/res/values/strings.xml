@@ -67,4 +67,5 @@
     <string name="nav_weather_retrofit">Weather (Retrofit)</string>
     <string name="humidity">Humidity</string>
     <string name="pressure">Pressure</string>
+    <string name="nav_time">Time</string>
 </resources>

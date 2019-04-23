@@ -21,6 +21,7 @@ import android.widget.Toast;
 import ru.zaharova.oxana.gym.fragments.AsyncTaskFragment;
 import ru.zaharova.oxana.gym.fragments.CalendarFragment;
 import ru.zaharova.oxana.gym.fragments.DatabaseFragment;
+import ru.zaharova.oxana.gym.fragments.RealTimeFragment;
 import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
 import ru.zaharova.oxana.gym.fragments.WeatherFragment;
 import ru.zaharova.oxana.gym.fragments.WeatherRetrofitFragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     private WeatherFragment weatherFragment;
     private DatabaseFragment databaseFragment;
     private WeatherRetrofitFragment weatherRetrofitFragment;
+    private RealTimeFragment realTimeFragment;
     private Intent intent;
 
     @Override
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         weatherFragment = new WeatherFragment();
         weatherRetrofitFragment = new WeatherRetrofitFragment();
         databaseFragment = new DatabaseFragment();
+        realTimeFragment = new RealTimeFragment();
         fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
@@ -79,6 +82,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         intent = new Intent(MainActivity.this, BackgroundService.class);
+        startService(intent);
+
+        intent = new Intent(MainActivity.this, RealTimeService.class);
         startService(intent);
     }
 
@@ -143,6 +149,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_sensors) {
             setFragment(sensorsViewFragment);
+        } else if (id == R.id.nav_real_time) {
+            setFragment(realTimeFragment);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
