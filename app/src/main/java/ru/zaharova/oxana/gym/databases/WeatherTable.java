@@ -55,7 +55,7 @@ public class WeatherTable {
     }
 
     @NonNull
-    public static List<Note> getNote(@NonNull SQLiteDatabase database, @NonNull String city) {
+    public static List<WeatherNote> getNote(@NonNull SQLiteDatabase database, @NonNull String city) {
         String selection = COLUMN_CITY + " = ?";
         String[] selectionArgs = { city };
         Cursor cursor = database.query(TABLE_WEATHER, null, selection,
@@ -64,15 +64,15 @@ public class WeatherTable {
     }
 
     @NonNull
-    public static List<Note> getAllNotes(@NonNull SQLiteDatabase database) {
+    public static List<WeatherNote> getAllNotes(@NonNull SQLiteDatabase database) {
 
         Cursor cursor = database.query(TABLE_WEATHER, null, null,
                 null, null, null, null);
         return getResultFromCursor(cursor);
     }
 
-    private static List<Note> getResultFromCursor(Cursor cursor) {
-        List<Note> result = null;
+    private static List<WeatherNote> getResultFromCursor(Cursor cursor) {
+        List<WeatherNote> result = null;
 
         if(cursor != null && cursor.moveToFirst()) {
             result = new ArrayList<>(cursor.getCount());
@@ -86,14 +86,14 @@ public class WeatherTable {
                 float temp = cursor.getFloat(tempIdx);
                 int hum = cursor.getInt(humIdx);
                 int press = cursor.getInt(pressIdx);
-                Note note = new Note(city, temp, hum, press);
-                result.add(note);
+                WeatherNote weatherNote = new WeatherNote(city, temp, hum, press);
+                result.add(weatherNote);
             } while (cursor.moveToNext());
         }
 
         try {
             cursor.close();
         } catch (Exception ignored) {}
-        return result == null ? new ArrayList<Note>(0) : result;
+        return result == null ? new ArrayList<WeatherNote>(0) : result;
     }
 }

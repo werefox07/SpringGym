@@ -2,13 +2,13 @@ package ru.zaharova.oxana.gym.databases;
 
 import android.support.annotation.NonNull;
 
-public class Note {
+public class WeatherNote {
     private String city;
     private float temp;
     private int hum;
     private int press;
 
-    Note(String city, float temp, int hum, int press) {
+    WeatherNote(String city, float temp, int hum, int press) {
         this.city = city;
         this.temp = temp;
         this.hum = hum;

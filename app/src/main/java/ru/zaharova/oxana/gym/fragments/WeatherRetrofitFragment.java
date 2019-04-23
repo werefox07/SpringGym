@@ -27,7 +27,7 @@ import retrofit2.Response;
 import ru.zaharova.oxana.gym.CircleTransformation;
 import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.databases.DatabaseHelper;
-import ru.zaharova.oxana.gym.databases.Note;
+import ru.zaharova.oxana.gym.databases.WeatherNote;
 import ru.zaharova.oxana.gym.databases.WeatherTable;
 import ru.zaharova.oxana.gym.rest.OpenWeatherRepo;
 import ru.zaharova.oxana.gym.rest.entites.WeatherRequestRestModel;
@@ -130,8 +130,8 @@ public class WeatherRetrofitFragment extends Fragment {
     }
 
     private void saveToBD(String city) {
-        List<Note> notes = WeatherTable.getNote(database, city);
-        if (notes.isEmpty()) {
+        List<WeatherNote> weatherNotes = WeatherTable.getNote(database, city);
+        if (weatherNotes.isEmpty()) {
             WeatherTable.addNote(city, model.main.temp, model.main.humidity, model.main.pressure, database);
         } else {
             WeatherTable.editNote(city, model.main.temp, model.main.humidity, model.main.pressure, database);

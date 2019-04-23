@@ -15,7 +15,7 @@ import java.util.List;
 
 import ru.zaharova.oxana.gym.R;
 import ru.zaharova.oxana.gym.databases.DatabaseHelper;
-import ru.zaharova.oxana.gym.databases.Note;
+import ru.zaharova.oxana.gym.databases.WeatherNote;
 import ru.zaharova.oxana.gym.databases.WeatherTable;
 
 public class DatabaseFragment extends Fragment {
@@ -41,10 +41,10 @@ public class DatabaseFragment extends Fragment {
 
     private void initGUI(View root) {
         textView = root.findViewById(R.id.text_view_database);
-        List<Note> notesWeather = WeatherTable.getAllNotes(database);
+        List<WeatherNote> notesWeather = WeatherTable.getAllNotes(database);
         StringBuilder text = new StringBuilder();
-        for (Note note : notesWeather) {
-            text.append(note.getCity()).append(" ").append(note.getTemp()).append(" ").append(note.getHum()).append(" ").append(note.getPress()).append("\n");
+        for (WeatherNote weatherNote : notesWeather) {
+            text.append(weatherNote.getCity()).append(" ").append(weatherNote.getTemp()).append(" ").append(weatherNote.getHum()).append(" ").append(weatherNote.getPress()).append("\n");
         }
         textView.setText(text.toString());
     }
