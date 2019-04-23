@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import ru.zaharova.oxana.gym.fragments.AsyncTaskFragment;
 import ru.zaharova.oxana.gym.fragments.CalendarFragment;
+import ru.zaharova.oxana.gym.fragments.DatabaseFragment;
 import ru.zaharova.oxana.gym.fragments.SensorsViewFragment;
 import ru.zaharova.oxana.gym.fragments.WeatherFragment;
 import ru.zaharova.oxana.gym.fragments.WeatherRetrofitFragment;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private CalendarFragment calendarViewFragment;
     private AsyncTaskFragment asyncTaskFragment;
     private WeatherFragment weatherFragment;
+    private DatabaseFragment databaseFragment;
     private WeatherRetrofitFragment weatherRetrofitFragment;
     private Intent intent;
 
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity
         asyncTaskFragment = new AsyncTaskFragment();
         weatherFragment = new WeatherFragment();
         weatherRetrofitFragment = new WeatherRetrofitFragment();
+        databaseFragment = new DatabaseFragment();
         fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
@@ -122,8 +125,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-
+        if (id == R.id.nav_notes) {
+            setFragment(databaseFragment);
         } else if (id == R.id.nav_weather) {
             setFragment(weatherFragment);
         } else if (id == R.id.nav_weather_retrofit) {

@@ -35,7 +35,7 @@
     <string name="add_description">Clicked \"Add\"</string>
     <string name="settings_description">Clicked \"Settings\"</string>
     <string name="menu_search">Search</string>
-    <string name="nav_import_camera">Import</string>
+    <string name="nav_notes">Notes</string>
     <string name="nav_group_communicate">Communicate</string>
     <string name="nav_share">Share</string>
     <string name="nav_send">Send</string>

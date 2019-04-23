@@ -3,6 +3,7 @@ package ru.zaharova.oxana.gym.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -24,6 +26,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.zaharova.oxana.gym.CircleTransformation;
 import ru.zaharova.oxana.gym.R;
+import ru.zaharova.oxana.gym.databases.DatabaseHelper;
+import ru.zaharova.oxana.gym.databases.WeatherNote;
+import ru.zaharova.oxana.gym.databases.WeatherTable;
 import ru.zaharova.oxana.gym.rest.OpenWeatherRepo;
 import ru.zaharova.oxana.gym.rest.entites.WeatherRequestRestModel;
 
@@ -35,6 +40,7 @@ public class WeatherRetrofitFragment extends Fragment {
     private ImageView imageView;
     private Button button;
 
+    private SQLiteDatabase database;
     private SharedPreferences sharedPref;
     private String TEXT_KEY_CITY_RETROFIT = "cityName";
 
@@ -55,14 +61,18 @@ public class WeatherRetrofitFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_weather_retrofit, container, false);
         sharedPref = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
-
         initGui(root);
         initEvents();
         String city = loadCityName();
         requestRetrofit(city);
         editCity.setText(city);
         loadImage();
+        initDB();
         return root;
+    }
+
+    private void initDB() {
+        database = new DatabaseHelper(context.getApplicationContext()).getWritableDatabase();
     }
 
     private void loadImage() {
@@ -97,7 +107,7 @@ public class WeatherRetrofitFragment extends Fragment {
         return sharedPref.getString(TEXT_KEY_CITY_RETROFIT, "Moscow");
     }
 
-    private void requestRetrofit(String city) {
+    private void requestRetrofit(final String city) {
         OpenWeatherRepo.getSingleton().getAPI().loadWeather(city,
                 "762ee61f52313fbd10a4eb54ae4d4de2", "metric")
                 .enqueue(new Callback<WeatherRequestRestModel>() {
@@ -109,14 +119,23 @@ public class WeatherRetrofitFragment extends Fragment {
                             setTemperature();
                             setHumidity();
                             setPressure();
+                            saveToBD(city);
                         }
                     }
-
                     @Override
                     public void onFailure(@NonNull Call<WeatherRequestRestModel> call, @NonNull Throwable t) {
                         textTemp.setText(R.string.error_text);
                     }
                 });
+    }
+
+    private void saveToBD(String city) {
+        List<WeatherNote> weatherNotes = WeatherTable.getNote(database, city);
+        if (weatherNotes.isEmpty()) {
+            WeatherTable.addNote(city, model.main.temp, model.main.humidity, model.main.pressure, database);
+        } else {
+            WeatherTable.editNote(city, model.main.temp, model.main.humidity, model.main.pressure, database);
+        }
     }
 
     private void setTemperature() {
