@@ -25,7 +25,6 @@
             </intent-filter>
         </activity>
         <service android:name=".BackgroundService" />
-        <service android:name=".RealTimeService" />
     </application>
 
 </manifest>

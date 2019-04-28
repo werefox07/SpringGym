@@ -83,9 +83,6 @@ public class MainActivity extends AppCompatActivity
 
         intent = new Intent(MainActivity.this, BackgroundService.class);
         startService(intent);
-
-        intent = new Intent(MainActivity.this, RealTimeService.class);
-        startService(intent);
     }
 
     private void setFragment(Fragment fragment) {
