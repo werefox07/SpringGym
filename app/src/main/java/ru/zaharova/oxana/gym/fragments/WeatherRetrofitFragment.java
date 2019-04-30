@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +22,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,8 +42,6 @@ import ru.zaharova.oxana.gym.databases.WeatherNote;
 import ru.zaharova.oxana.gym.databases.WeatherTable;
 import ru.zaharova.oxana.gym.rest.OpenWeatherRepo;
 import ru.zaharova.oxana.gym.rest.entites.WeatherRequestRestModel;
-
-import static android.content.Context.LOCATION_SERVICE;
 
 public class WeatherRetrofitFragment extends Fragment {
     private TextView textTemp;
@@ -186,11 +188,25 @@ public class WeatherRetrofitFragment extends Fragment {
                 && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED)
             return;
-        locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        provider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(provider);
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            getWeatherByLocation(location);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("MapDemoActivity", "Error trying to get last GPS location");
+                    }
+                });
+    }
+
+    private void getWeatherByLocation(Location location) {
         final String latitude = Double.toString(location.getLatitude());
         final String longitude = Double.toString(location.getLongitude());
         new Thread() {
@@ -212,6 +228,4 @@ public class WeatherRetrofitFragment extends Fragment {
                 },
                 PERMISSION_REQUEST_CODE);
     }
-
-
 }
